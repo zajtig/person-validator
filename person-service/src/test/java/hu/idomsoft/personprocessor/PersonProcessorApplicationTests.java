@@ -50,7 +50,7 @@ public class PersonProcessorApplicationTests {
 
 		List<ValidationError> validationErrors = getAllValidationError(processPerson(szemelyDTO).getSzemelyDTO());
 		System.out.println(validationErrors);
-		Assert.assertEquals(validationErrors.isEmpty(), true);
+		Assert.assertEquals(true, validationErrors.isEmpty());
 	}
 
 	@Test
@@ -60,7 +60,7 @@ public class PersonProcessorApplicationTests {
 
 		List<ValidationError> validationErrors = getAllValidationError(processPerson(szemelyDTO).getSzemelyDTO());
 		System.out.println(validationErrors);
-		Assert.assertEquals(existsValidationErrorOnField(validationErrors, "visNev"), true);
+		Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "visNev"));
 	}
 
 	@Test
@@ -70,7 +70,7 @@ public class PersonProcessorApplicationTests {
 
 		List<ValidationError> validationErrors = getAllValidationError(processPerson(szemelyDTO).getSzemelyDTO());
 		System.out.println(validationErrors);
-		Assert.assertEquals(existsValidationErrorOnField(validationErrors, "visNev"), true);
+		Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "visNev"));
 	}
 
 	@Test
@@ -80,7 +80,7 @@ public class PersonProcessorApplicationTests {
 
 		List<ValidationError> validationErrors = getAllValidationError(processPerson(szemelyDTO).getSzemelyDTO());
 		System.out.println(validationErrors);
-		Assert.assertEquals(existsValidationErrorOnField(validationErrors, "szulNev"), true);
+		Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "szulNev"));
 	}
 
 	@Test
@@ -89,7 +89,7 @@ public class PersonProcessorApplicationTests {
 		szemelyDTO.setaNev("Dr. Nagy");
 		List<ValidationError> validationErrors = getAllValidationError(processPerson(szemelyDTO).getSzemelyDTO());
 		System.out.println(validationErrors);
-		Assert.assertEquals(existsValidationErrorOnField(validationErrors, "aNev"), true);
+		Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "aNev"));
 	}
 
 	@Test
@@ -98,7 +98,7 @@ public class PersonProcessorApplicationTests {
 		szemelyDTO.setSzulDat(new SimpleDateFormat("yyyy-MM-dd").parse("1895-01-01"));
 		List<ValidationError> validationErrors = getAllValidationError(processPerson(szemelyDTO).getSzemelyDTO());
 		System.out.println(validationErrors);
-		Assert.assertEquals(existsValidationErrorOnField(validationErrors, "szulDat"), true);
+		Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "szulDat"));
 	}
 
 	@Test
@@ -108,7 +108,7 @@ public class PersonProcessorApplicationTests {
 
 		List<ValidationError> validationErrors = getAllValidationError(processPerson(szemelyDTO).getSzemelyDTO());
 		System.out.println(validationErrors);
-		Assert.assertEquals(existsValidationErrorOnField(validationErrors, "neme"), true);
+		Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "neme"));
 	}
 
 	@Test
@@ -118,7 +118,7 @@ public class PersonProcessorApplicationTests {
 
 		List<ValidationError> validationErrors = getAllValidationError(processPerson(szemelyDTO).getSzemelyDTO());
 		System.out.println(validationErrors);
-		Assert.assertEquals(existsValidationErrorOnField(validationErrors, "neme"), true);
+		Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "neme"));
 	}
 
 	@Test
@@ -128,7 +128,7 @@ public class PersonProcessorApplicationTests {
 
 		List<ValidationError> validationErrors = getAllValidationError(processPerson(szemelyDTO).getSzemelyDTO());
 		System.out.println(validationErrors);
-		Assert.assertEquals(existsValidationErrorOnField(validationErrors, "allampKod"), true);
+		Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "allampKod"));
 	}
 
 	@Test
@@ -137,7 +137,7 @@ public class PersonProcessorApplicationTests {
 		szemelyDTO.setAllampKod("HUN");
 
 		String allampDekod = processPerson(szemelyDTO).getSzemelyDTO().getAllampDekod();
-		Assert.assertEquals(allampDekod, "MAGYARORSZÁG ÁLLAMPOLGÁRA");
+		Assert.assertEquals("MAGYARORSZÁG ÁLLAMPOLGÁRA", allampDekod);
 	}
 
 	@Test
@@ -147,7 +147,7 @@ public class PersonProcessorApplicationTests {
 
 		List<ValidationError> validationErrors = getAllValidationError(processPerson(szemelyDTO).getSzemelyDTO());
 		System.out.println(validationErrors);
-		Assert.assertEquals(existsValidationErrorOnField(validationErrors, "okmLista"), true);
+		Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "okmLista"));
 	}
 
 	private ProcessPersonResponse processPerson(SzemelyDTO szemelyDTO) throws Exception {

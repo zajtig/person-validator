@@ -47,7 +47,7 @@ public class DocumentProcessorApplicationTests {
 
 		List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
 		logger.info("validationErrors:", validationErrors);
-		Assert.assertEquals(validationErrors.isEmpty(), true);
+		Assert.assertEquals(true, validationErrors.isEmpty());
 	}
 
 	@Test
@@ -57,7 +57,7 @@ public class DocumentProcessorApplicationTests {
 
 		List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
 		logger.info("validationErrors:", validationErrors);
-		Assert.assertEquals(existsValidationErrorOnField(validationErrors, "okmTipus"), true);
+		Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "okmTipus"));
 	}
 
 	@Test
@@ -67,7 +67,7 @@ public class DocumentProcessorApplicationTests {
 
 		List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
 		logger.info("validationErrors:", validationErrors);
-		Assert.assertEquals(existsValidationErrorOnField(validationErrors, "okmanySzam"), true);
+		Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "okmanySzam"));
 	}
 
 	@Test
@@ -78,7 +78,7 @@ public class DocumentProcessorApplicationTests {
 
 		List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
 		logger.info("validationErrors:", validationErrors);
-		Assert.assertEquals(validationErrors.isEmpty(), true);
+		Assert.assertEquals(true, validationErrors.isEmpty());
 	}
 
 	@Test
@@ -89,7 +89,7 @@ public class DocumentProcessorApplicationTests {
 
 		List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
 		logger.info("validationErrors:", validationErrors);
-		Assert.assertEquals(existsValidationErrorOnField(validationErrors, "okmanySzam"), true);
+		Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "okmanySzam"));
 	}
 
 	@Test
@@ -99,7 +99,7 @@ public class DocumentProcessorApplicationTests {
 
 		List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
 		logger.info("validationErrors:", validationErrors);
-		Assert.assertEquals(existsValidationErrorOnField(validationErrors, "okmanyKep"), true);
+		Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "okmanyKep"));
 	}
 
 	@Test
@@ -109,7 +109,7 @@ public class DocumentProcessorApplicationTests {
 
 		List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
 		logger.info("validationErrors:", validationErrors);
-		Assert.assertEquals(existsValidationErrorOnField(validationErrors, "okmanyKep"), true);
+		Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "okmanyKep"));
 	}
 
 	@Test
@@ -118,7 +118,7 @@ public class DocumentProcessorApplicationTests {
 		szemelyDTO.getOkmLista().get(0).setLejarDat(new SimpleDateFormat("yyyy-MM-dd").parse("2000-01-01"));
 
 		Boolean isErvenyes = processDocumentResponse(szemelyDTO).getOkmanyDTOList().get(0).isErvenyes();
-		Assert.assertEquals(isErvenyes, false);
+		Assert.assertEquals(false, isErvenyes);
 	}
 
 	private List<ValidationError> getAllValidationError(List<OkmanyDTO> okmanyDTOList) {
