@@ -33,154 +33,158 @@ import java.util.List;
 @AutoConfigureMockMvc
 public class DocumentProcessorApplicationTests {
 
-	@Autowired
-	private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
-	@Autowired
-	private ObjectMapper objectMapper;
+    @Autowired
+    private ObjectMapper objectMapper;
 
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Test
-	public void processDocumentOk() throws Exception {
-		SzemelyDTO szemelyDTO = createSzemelyDTO();
+    static {
+        System.setProperty("mongodb.port", "27020");
+    }
 
-		List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
-		logger.info("validationErrors:", validationErrors);
-		Assert.assertEquals(true, validationErrors.isEmpty());
-	}
+    @Test
+    public void processDocumentOk() throws Exception {
+        SzemelyDTO szemelyDTO = createSzemelyDTO();
 
-	@Test
-	public void processOkmTipus() throws Exception {
-		SzemelyDTO szemelyDTO = createSzemelyDTO();
-		szemelyDTO.getOkmLista().get(0).setOkmTipus("Q");
+        List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
+        logger.info("validationErrors:", validationErrors);
+        Assert.assertEquals(true, validationErrors.isEmpty());
+    }
 
-		List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
-		logger.info("validationErrors:", validationErrors);
-		Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "okmTipus"));
-	}
+    @Test
+    public void processOkmTipus() throws Exception {
+        SzemelyDTO szemelyDTO = createSzemelyDTO();
+        szemelyDTO.getOkmLista().get(0).setOkmTipus("Q");
 
-	@Test
-	public void processOkmanySzam1() throws Exception {
-		SzemelyDTO szemelyDTO = createSzemelyDTO();
-		szemelyDTO.getOkmLista().get(0).setOkmanySzam("Q");
+        List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
+        logger.info("validationErrors:", validationErrors);
+        Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "okmTipus"));
+    }
 
-		List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
-		logger.info("validationErrors:", validationErrors);
-		Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "okmanySzam"));
-	}
+    @Test
+    public void processOkmanySzam1() throws Exception {
+        SzemelyDTO szemelyDTO = createSzemelyDTO();
+        szemelyDTO.getOkmLista().get(0).setOkmanySzam("Q");
 
-	@Test
-	public void processOkmanySzam2() throws Exception {
-		SzemelyDTO szemelyDTO = createSzemelyDTO();
-		szemelyDTO.getOkmLista().get(0).setOkmTipus("2");
-		szemelyDTO.getOkmLista().get(0).setOkmanySzam("AB1234567");
+        List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
+        logger.info("validationErrors:", validationErrors);
+        Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "okmanySzam"));
+    }
 
-		List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
-		logger.info("validationErrors:", validationErrors);
-		Assert.assertEquals(true, validationErrors.isEmpty());
-	}
+    @Test
+    public void processOkmanySzam2() throws Exception {
+        SzemelyDTO szemelyDTO = createSzemelyDTO();
+        szemelyDTO.getOkmLista().get(0).setOkmTipus("2");
+        szemelyDTO.getOkmLista().get(0).setOkmanySzam("AB1234567");
 
-	@Test
-	public void processOkmanySzam3() throws Exception {
-		SzemelyDTO szemelyDTO = createSzemelyDTO();
-		szemelyDTO.getOkmLista().get(0).setOkmTipus("3");
-		szemelyDTO.getOkmLista().get(0).setOkmanySzam("0123456789");
+        List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
+        logger.info("validationErrors:", validationErrors);
+        Assert.assertEquals(true, validationErrors.isEmpty());
+    }
 
-		List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
-		logger.info("validationErrors:", validationErrors);
-		Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "okmanySzam"));
-	}
+    @Test
+    public void processOkmanySzam3() throws Exception {
+        SzemelyDTO szemelyDTO = createSzemelyDTO();
+        szemelyDTO.getOkmLista().get(0).setOkmTipus("3");
+        szemelyDTO.getOkmLista().get(0).setOkmanySzam("0123456789");
 
-	@Test
-	public void processOkmanyKep1() throws Exception {
-		SzemelyDTO szemelyDTO = createSzemelyDTO();
-		szemelyDTO.getOkmLista().get(0).setOkmanyKep(loadBadImage1());
+        List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
+        logger.info("validationErrors:", validationErrors);
+        Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "okmanySzam"));
+    }
 
-		List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
-		logger.info("validationErrors:", validationErrors);
-		Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "okmanyKep"));
-	}
+    @Test
+    public void processOkmanyKep1() throws Exception {
+        SzemelyDTO szemelyDTO = createSzemelyDTO();
+        szemelyDTO.getOkmLista().get(0).setOkmanyKep(loadBadImage1());
 
-	@Test
-	public void processOkmanyKep2() throws Exception {
-		SzemelyDTO szemelyDTO = createSzemelyDTO();
-		szemelyDTO.getOkmLista().get(0).setOkmanyKep(loadBadImage2());
+        List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
+        logger.info("validationErrors:", validationErrors);
+        Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "okmanyKep"));
+    }
 
-		List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
-		logger.info("validationErrors:", validationErrors);
-		Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "okmanyKep"));
-	}
+    @Test
+    public void processOkmanyKep2() throws Exception {
+        SzemelyDTO szemelyDTO = createSzemelyDTO();
+        szemelyDTO.getOkmLista().get(0).setOkmanyKep(loadBadImage2());
 
-	@Test
-	public void processErvenyes() throws Exception {
-		SzemelyDTO szemelyDTO = createSzemelyDTO();
-		szemelyDTO.getOkmLista().get(0).setLejarDat(new SimpleDateFormat("yyyy-MM-dd").parse("2000-01-01"));
+        List<ValidationError> validationErrors = getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
+        logger.info("validationErrors:", validationErrors);
+        Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "okmanyKep"));
+    }
 
-		Boolean isErvenyes = processDocumentResponse(szemelyDTO).getOkmanyDTOList().get(0).isErvenyes();
-		Assert.assertEquals(false, isErvenyes);
-	}
+    @Test
+    public void processErvenyes() throws Exception {
+        SzemelyDTO szemelyDTO = createSzemelyDTO();
+        szemelyDTO.getOkmLista().get(0).setLejarDat(new SimpleDateFormat("yyyy-MM-dd").parse("2000-01-01"));
 
-	private List<ValidationError> getAllValidationError(List<OkmanyDTO> okmanyDTOList) {
-		List<ValidationError> result = new ArrayList<>();
-		for (OkmanyDTO okmanyDTO : okmanyDTOList) {
-			result.addAll(okmanyDTO.getValidationErrors());
-		}
-		return result;
-	}
+        Boolean isErvenyes = processDocumentResponse(szemelyDTO).getOkmanyDTOList().get(0).isErvenyes();
+        Assert.assertEquals(false, isErvenyes);
+    }
 
-	private ProcessDocumentResponse processDocumentResponse(SzemelyDTO szemelyDTO) throws Exception {
-		String responseString = mockMvc.perform( MockMvcRequestBuilders
-				.post("/processDocument")
-				.content(objectMapper.writeValueAsString(szemelyDTO))
-				.contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON))
-				.andReturn().getResponse().getContentAsString();
-		return objectMapper.readValue(responseString, ProcessDocumentResponse.class);
-	}
+    private List<ValidationError> getAllValidationError(List<OkmanyDTO> okmanyDTOList) {
+        List<ValidationError> result = new ArrayList<>();
+        for (OkmanyDTO okmanyDTO : okmanyDTOList) {
+            result.addAll(okmanyDTO.getValidationErrors());
+        }
+        return result;
+    }
+
+    private ProcessDocumentResponse processDocumentResponse(SzemelyDTO szemelyDTO) throws Exception {
+        String responseString = mockMvc.perform(MockMvcRequestBuilders
+                .post("/processDocument")
+                .content(objectMapper.writeValueAsString(szemelyDTO))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse().getContentAsString();
+        return objectMapper.readValue(responseString, ProcessDocumentResponse.class);
+    }
 
 
-	private boolean existsValidationErrorOnField(List<ValidationError> validationErrors, String fieldName) {
-		for (ValidationError validationError: validationErrors) {
-			if (fieldName.equals(validationError.getField())) {
-				return true;
-			}
-		}
-		return false;
-	}
+    private boolean existsValidationErrorOnField(List<ValidationError> validationErrors, String fieldName) {
+        for (ValidationError validationError : validationErrors) {
+            if (fieldName.equals(validationError.getField())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	private SzemelyDTO createSzemelyDTO() throws ParseException, IOException, URISyntaxException {
-		SzemelyDTO szemelyDTO = new SzemelyDTO();
-		szemelyDTO.setOkmLista(createOkmanyDTOList());
-		szemelyDTO.setAllampKod("HUN");
-		szemelyDTO.setaNev("Dr. Nagy Irén");
-		szemelyDTO.setNeme("N");
-		szemelyDTO.setSzulDat(new SimpleDateFormat("yyyy-MM-dd").parse("1985-09-19"));
-		szemelyDTO.setSzulNev("Nagy Ferenc");
-		szemelyDTO.setVisNev("Nagy Ferenc");
-		return szemelyDTO;
-	}
+    private SzemelyDTO createSzemelyDTO() throws ParseException, IOException, URISyntaxException {
+        SzemelyDTO szemelyDTO = new SzemelyDTO();
+        szemelyDTO.setOkmLista(createOkmanyDTOList());
+        szemelyDTO.setAllampKod("HUN");
+        szemelyDTO.setaNev("Dr. Nagy Irén");
+        szemelyDTO.setNeme("N");
+        szemelyDTO.setSzulDat(new SimpleDateFormat("yyyy-MM-dd").parse("1985-09-19"));
+        szemelyDTO.setSzulNev("Nagy Ferenc");
+        szemelyDTO.setVisNev("Nagy Ferenc");
+        return szemelyDTO;
+    }
 
-	private List<OkmanyDTO> createOkmanyDTOList() throws ParseException, IOException, URISyntaxException {
-		List<OkmanyDTO> result = new ArrayList<>();
-		OkmanyDTO okmanyDTO = new OkmanyDTO();
-		okmanyDTO.setOkmTipus("1");
-		okmanyDTO.setOkmanySzam("123456AB");
-		okmanyDTO.setLejarDat(new SimpleDateFormat("yyyy-MM-dd").parse("2022-12-12"));
-		okmanyDTO.setOkmanyKep(loadGoodImage());
-		result.add(okmanyDTO);
-		return result;
-	}
+    private List<OkmanyDTO> createOkmanyDTOList() throws ParseException, IOException, URISyntaxException {
+        List<OkmanyDTO> result = new ArrayList<>();
+        OkmanyDTO okmanyDTO = new OkmanyDTO();
+        okmanyDTO.setOkmTipus("1");
+        okmanyDTO.setOkmanySzam("123456AB");
+        okmanyDTO.setLejarDat(new SimpleDateFormat("yyyy-MM-dd").parse("2022-12-12"));
+        okmanyDTO.setOkmanyKep(loadGoodImage());
+        result.add(okmanyDTO);
+        return result;
+    }
 
-	private Byte[] loadBadImage1() throws URISyntaxException, IOException {
-		return ArrayUtils.toObject(FileUtils.readFileToByteArray(new File(getClass().getClassLoader().getResource("arckep_rossz.jpg").toURI())));
-	}
+    private Byte[] loadBadImage1() throws URISyntaxException, IOException {
+        return ArrayUtils.toObject(FileUtils.readFileToByteArray(new File(getClass().getClassLoader().getResource("arckep_rossz.jpg").toURI())));
+    }
 
-	private Byte[] loadBadImage2() throws URISyntaxException, IOException {
-		return ArrayUtils.toObject(FileUtils.readFileToByteArray(new File(getClass().getClassLoader().getResource("kep.txt").toURI())));
-	}
+    private Byte[] loadBadImage2() throws URISyntaxException, IOException {
+        return ArrayUtils.toObject(FileUtils.readFileToByteArray(new File(getClass().getClassLoader().getResource("kep.txt").toURI())));
+    }
 
-	private Byte[] loadGoodImage() throws URISyntaxException, IOException {
-		return ArrayUtils.toObject(FileUtils.readFileToByteArray(new File(getClass().getClassLoader().getResource("arckep_jo.jpg").toURI())));
-	}
+    private Byte[] loadGoodImage() throws URISyntaxException, IOException {
+        return ArrayUtils.toObject(FileUtils.readFileToByteArray(new File(getClass().getClassLoader().getResource("arckep_jo.jpg").toURI())));
+    }
 }

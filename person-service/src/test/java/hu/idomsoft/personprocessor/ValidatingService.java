@@ -8,9 +8,9 @@ import javax.validation.Valid;
 
 @Service
 @Validated
-class ValidatingService{
+class ValidatingService {
 
-    void validateInput(@Valid SzemelyDTO szemelyDTO){
+    void validateInput(@Valid SzemelyDTO szemelyDTO) {
         // do something
     }
 

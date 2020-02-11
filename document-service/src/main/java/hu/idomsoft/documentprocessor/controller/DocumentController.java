@@ -22,7 +22,7 @@ public class DocumentController {
 
     @PostMapping(value = "/processDocument", consumes = "application/json", produces = "application/json")
     public ProcessDocumentResponse processDocument(@RequestBody SzemelyDTO szemelyDTO) {
-        logger.info("request: {}" , szemelyDTO);
+        logger.info("request: {}", szemelyDTO);
         ProcessDocumentResponse response = new ProcessDocumentResponse();
         List<OkmanyDTO> result = documentService.process(szemelyDTO.getOkmLista());
         response.setOkmanyDTOList(result);

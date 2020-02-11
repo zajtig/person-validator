@@ -24,27 +24,27 @@ import java.io.IOException;
 @EnableDiscoveryClient
 public class DocumentProcessorApplication implements CommandLineRunner {
 
-	@Autowired
-	private OkmanytipusDictionaryRepository okmanytipusDictionaryRepository;
+    @Autowired
+    private OkmanytipusDictionaryRepository okmanytipusDictionaryRepository;
 
-	public static void main(String[] args) {
-		SpringApplication.run(DocumentProcessorApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DocumentProcessorApplication.class, args);
+    }
 
-	@Override
-	public void run(String[] args) throws IOException {
-		loadOkmanytipusDictionary();
-	}
+    @Override
+    public void run(String[] args) throws IOException {
+        loadOkmanytipusDictionary();
+    }
 
-	private void loadOkmanytipusDictionary() throws IOException {
-		ObjectMapper objectMapper = new ObjectMapper();
-		OkmanytipusDictionary dictionary = objectMapper.readValue(ResourceUtils.getFile(
-				"classpath:kodszotar46_okmanytipus.json"), OkmanytipusDictionary.class);
-		okmanytipusDictionaryRepository.insert(dictionary);
-	}
+    private void loadOkmanytipusDictionary() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        OkmanytipusDictionary dictionary = objectMapper.readValue(ResourceUtils.getFile(
+                "classpath:kodszotar46_okmanytipus.json"), OkmanytipusDictionary.class);
+        okmanytipusDictionaryRepository.insert(dictionary);
+    }
 
-	@Bean
-	public Sampler defaultSampler() {
-		return Sampler.ALWAYS_SAMPLE;
-	}
+    @Bean
+    public Sampler defaultSampler() {
+        return Sampler.ALWAYS_SAMPLE;
+    }
 }
