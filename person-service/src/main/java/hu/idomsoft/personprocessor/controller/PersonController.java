@@ -24,14 +24,14 @@ public class PersonController {
 
     @PostMapping(value = "/processPerson", consumes = "application/json", produces = "application/json")
     public ProcessPersonResponse processPerson(@RequestBody SzemelyDTO szemelyDTO) {
-        logger.info("request: {}", szemelyDTO);
+        logger.debug("request: {}", szemelyDTO);
         ProcessDocumentResponse processPersonResponse = documentServiceProxy.processDocument(szemelyDTO);
         szemelyDTO.setOkmLista(processPersonResponse.getOkmanyDTOList());
 
         ProcessPersonResponse response = new ProcessPersonResponse();
         SzemelyDTO result = personService.process(szemelyDTO);
         response.setSzemelyDTO(result);
-        logger.info("responset: {}", response);
+        logger.debug("responset: {}", response);
         return response;
     }
 }

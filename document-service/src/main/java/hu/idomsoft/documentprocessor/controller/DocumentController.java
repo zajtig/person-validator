@@ -22,11 +22,11 @@ public class DocumentController {
 
     @PostMapping(value = "/processDocument", consumes = "application/json", produces = "application/json")
     public ProcessDocumentResponse processDocument(@RequestBody SzemelyDTO szemelyDTO) {
-        logger.info("request: {}", szemelyDTO);
+        logger.debug("request: {}", szemelyDTO);
         ProcessDocumentResponse response = new ProcessDocumentResponse();
         List<OkmanyDTO> result = documentService.process(szemelyDTO.getOkmLista());
         response.setOkmanyDTOList(result);
-        logger.info("responset: {}", response);
+        logger.debug("responset: {}", response);
         return response;
     }
 }
