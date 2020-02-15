@@ -9,13 +9,6 @@ public class NameValidator implements ConstraintValidator<Name, String> {
 
     private static final String DOCTOR_PATTERN = "[dD][rR].";
 
-    private String fieldName;
-
-    @Override
-    public void initialize(Name constraintAnnotation) {
-        fieldName = constraintAnnotation.fieldName();
-    }
-
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         if (StringUtils.isEmpty(value)) {
@@ -31,7 +24,7 @@ public class NameValidator implements ConstraintValidator<Name, String> {
         }
 
         if (!StringUtils.isEmpty(message)) {
-            context.buildConstraintViolationWithTemplate(message)/*.addPropertyNode(fieldName)*/.addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(message).addConstraintViolation();
             return false;
         }
         return true;

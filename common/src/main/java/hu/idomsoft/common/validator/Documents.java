@@ -16,8 +16,6 @@ public @interface Documents {
 
     String message() default "";
 
-    String fieldName();
-
     Class<?>[] groups() default { };
 
     Class<? extends Payload>[] payload() default { };

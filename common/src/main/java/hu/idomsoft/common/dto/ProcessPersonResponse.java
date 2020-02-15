@@ -1,6 +1,8 @@
 package hu.idomsoft.common.dto;
 
-public class ProcessPersonResponse {
+import java.io.Serializable;
+
+public class ProcessPersonResponse implements Serializable {
 
     private SzemelyDTO szemelyDTO;
 

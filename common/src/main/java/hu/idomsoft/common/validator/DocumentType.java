@@ -14,8 +14,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 public @interface DocumentType {
     String message() default "";
 
-    String fieldName();
-
     Class<?>[] groups() default { };
 
     Class<? extends Payload>[] payload() default { };

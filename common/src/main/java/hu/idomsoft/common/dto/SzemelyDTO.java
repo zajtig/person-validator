@@ -10,19 +10,15 @@ import hu.idomsoft.common.validator.Documents;
 import hu.idomsoft.common.validator.Name;
 import hu.idomsoft.common.validator.Nationality;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 /**
- *
  * @author Ruzsinak
  */
-public class SzemelyDTO implements Serializable{
+public class SzemelyDTO implements Serializable {
 
     /**
      * @return the visNev
@@ -144,21 +140,24 @@ public class SzemelyDTO implements Serializable{
 
     @NotBlank
     @Pattern(regexp = "^[a-záéíóöőúűA-ZÄÁÉÍÓÖŐÚŰ./'\\- ]+$")
-    @Name(fieldName = "visNev")
+    @Size(max = 80)
+    @Name
     private String visNev;
 
     @NotBlank
     @Pattern(regexp = "^[a-záéíóöőúűA-ZÄÁÉÍÓÖŐÚŰ./'\\- ]+$")
-    @Name(fieldName = "szulNev")
+    @Size(max = 80)
+    @Name
     private String szulNev;
 
     @NotBlank
     @Pattern(regexp = "^[a-záéíóöőúűA-ZÄÁÉÍÓÖŐÚŰ./'\\- ]+$")
-    @Name(fieldName = "aNev")
+    @Size(max = 80)
+    @Name
     private String aNev;
 
     @NotNull
-    @Age(min = 18, max = 120, fieldName = "szulDat")
+    @Age(min = 18, max = 120)
     private Date szulDat;
 
     @NotBlank
@@ -167,12 +166,12 @@ public class SzemelyDTO implements Serializable{
 
     @NotBlank
     @Size(min = 3, max = 3)
-    @Nationality(fieldName = "allampKod")
+    @Nationality
     private String allampKod;
-    
+
     private String allampDekod;
 
-    @Documents(fieldName = "okmLista")
+    @Documents
     private List<OkmanyDTO> okmLista;
 
     private List<ValidationError> validationErrors;

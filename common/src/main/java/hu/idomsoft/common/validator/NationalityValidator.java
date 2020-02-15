@@ -12,13 +12,6 @@ public class NationalityValidator implements ConstraintValidator<Nationality, St
     @Autowired
     private AllampolgDictionaryService allampolgDictionaryService;
 
-    private String fieldName;
-
-    @Override
-    public void initialize(Nationality constraintAnnotation) {
-        fieldName = constraintAnnotation.fieldName();
-    }
-
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         if (StringUtils.isEmpty(value)) {
@@ -33,7 +26,7 @@ public class NationalityValidator implements ConstraintValidator<Nationality, St
         }
 
         if (!StringUtils.isEmpty(message)) {
-            context.buildConstraintViolationWithTemplate(message)./*addPropertyNode(fieldName).*/addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(message).addConstraintViolation();
             return false;
         }
 

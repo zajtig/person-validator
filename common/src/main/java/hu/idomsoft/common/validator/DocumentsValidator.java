@@ -12,13 +12,6 @@ import java.util.stream.Collectors;
 
 public class DocumentsValidator implements ConstraintValidator<Documents, List<OkmanyDTO>> {
 
-    private String fieldName;
-
-    @Override
-    public void initialize(Documents constraintAnnotation) {
-        fieldName = constraintAnnotation.fieldName();
-    }
-
     @Override
     public boolean isValid(List<OkmanyDTO> okmanyDTOList, ConstraintValidatorContext context) {
         context.disableDefaultConstraintViolation();
@@ -38,7 +31,7 @@ public class DocumentsValidator implements ConstraintValidator<Documents, List<O
         }
 
         if (!messages.isEmpty()) {
-            context.buildConstraintViolationWithTemplate(messages.stream().map(String::valueOf).collect(Collectors.joining()))/*.addPropertyNode(fieldName)*/
+            context.buildConstraintViolationWithTemplate(messages.stream().map(String::valueOf).collect(Collectors.joining()))
                     .addConstraintViolation();
             return false;
         }

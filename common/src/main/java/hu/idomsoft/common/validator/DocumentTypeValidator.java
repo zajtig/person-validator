@@ -12,13 +12,6 @@ public class DocumentTypeValidator implements ConstraintValidator<DocumentType, 
     @Autowired
     private OkmanytipusDictionaryService okmanytipusDictionaryService;
 
-    private String fieldName;
-
-    @Override
-    public void initialize(DocumentType constraintAnnotation) {
-        fieldName = constraintAnnotation.fieldName();
-    }
-
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         if (StringUtils.isEmpty(value)) {
@@ -33,7 +26,7 @@ public class DocumentTypeValidator implements ConstraintValidator<DocumentType, 
         }
 
         if (!StringUtils.isEmpty(message)) {
-            context.buildConstraintViolationWithTemplate(message)./*addPropertyNode(fieldName).*/addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(message).addConstraintViolation();
             return false;
         }
 

@@ -19,13 +19,11 @@ public class JpegValidator implements ConstraintValidator<Jpeg, Byte[]> {
 
     private int definedHeight;
     private int definedWidth;
-    private String fieldName;
 
     @Override
     public void initialize(Jpeg constraintAnnotation) {
         definedHeight = constraintAnnotation.height();
         definedWidth = constraintAnnotation.width();
-        fieldName = constraintAnnotation.fieldName();
     }
 
     @Override
@@ -66,7 +64,7 @@ public class JpegValidator implements ConstraintValidator<Jpeg, Byte[]> {
 
         if (!messages.isEmpty()) {
             context.buildConstraintViolationWithTemplate(messages.stream().map(String::valueOf).collect(Collectors.joining()))
-                    /*.addPropertyNode(fieldName)*/.addConstraintViolation();
+                    .addConstraintViolation();
             return false;
         }
 

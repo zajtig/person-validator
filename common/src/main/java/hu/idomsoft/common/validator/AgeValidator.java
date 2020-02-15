@@ -13,14 +13,12 @@ public class AgeValidator implements ConstraintValidator<Age, Date> {
 
     private int min;
     private int max;
-    private String fieldName;
+
 
     @Override
     public void initialize(Age constraintAnnotation) {
         max = constraintAnnotation.max();
         min = constraintAnnotation.min();
-        fieldName = constraintAnnotation.fieldName();
-
     }
 
     @Override
@@ -47,7 +45,7 @@ public class AgeValidator implements ConstraintValidator<Age, Date> {
         }
 
         if (!StringUtils.isEmpty(message)) {
-            context.buildConstraintViolationWithTemplate(message)/*.addPropertyNode(fieldName)*/.addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(message).addConstraintViolation();
             return false;
         }
 

@@ -1,8 +1,9 @@
 package hu.idomsoft.common.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ProcessDocumentResponse {
+public class ProcessDocumentResponse implements Serializable {
 
     private List<OkmanyDTO> okmanyDTOList;
 

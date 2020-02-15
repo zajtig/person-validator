@@ -18,8 +18,6 @@ public @interface Age {
 
     String message() default "";
 
-    String fieldName();
-
     Class<?>[] groups() default { };
 
     Class<? extends Payload>[] payload() default { };

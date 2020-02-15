@@ -107,18 +107,18 @@ public class OkmanyDTO implements Serializable{
 
     @NotBlank
     @Size(min = 1, max = 1)
-    @DocumentType(fieldName = "okmTipus")
+    @DocumentType
     private String okmTipus;
 
     @NotBlank
     private String okmanySzam;
 
     @NotEmpty
-    @Jpeg(height = 1063, width = 827, fieldName = "okmanyKep")
+    @Jpeg(height = 1063, width = 827)
     private Byte[] okmanyKep;
     
     private Date lejarDat;
-    
+
     private Boolean ervenyes;
 
     private List<ValidationError> validationErrors = new ArrayList<>();
