@@ -42,6 +42,16 @@ public class PersonProcessorApplicationTests {
   @Autowired private ObjectMapper objectMapper;
 
   @Test
+  public void processPersonMin() throws Exception {
+    SzemelyDTO szemelyDTO = createMinimalSemelyDTO();
+
+    List<ValidationError> validationErrors =
+            getAllValidationError(processPerson(szemelyDTO).getSzemelyDTO());
+    System.out.println(validationErrors);
+    Assert.assertEquals(false, validationErrors.isEmpty());
+  }
+
+  @Test
   public void processPersonOk() throws Exception {
     SzemelyDTO szemelyDTO = createSzemelyDTO();
 
@@ -244,5 +254,12 @@ public class PersonProcessorApplicationTests {
                 new File(getClass().getClassLoader().getResource("arckep_jo.jpg").toURI()))));
     result.add(okmanyDTO);
     return result;
+  }
+
+  private SzemelyDTO createMinimalSemelyDTO() {
+    SzemelyDTO szemelyDTO = new SzemelyDTO();
+    szemelyDTO.setOkmLista(new ArrayList<>());
+    szemelyDTO.getOkmLista().add(new OkmanyDTO());
+    return szemelyDTO;
   }
 }

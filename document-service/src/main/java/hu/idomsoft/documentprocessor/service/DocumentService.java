@@ -31,7 +31,7 @@ public class DocumentService {
   }
 
   private void fillData(OkmanyDTO okmanyDTO) {
-    if (isLejarDatValid(okmanyDTO)) {
+    if (okmanyDTO.getLejarDat() != null && isLejarDatValid(okmanyDTO)) {
       Boolean ervenyes = okmanyDTO.getLejarDat().after(new Date());
       okmanyDTO.setErvenyes(ervenyes);
     }

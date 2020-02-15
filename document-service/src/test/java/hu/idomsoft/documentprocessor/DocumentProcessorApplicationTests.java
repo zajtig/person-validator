@@ -41,6 +41,16 @@ public class DocumentProcessorApplicationTests {
   }
 
   @Test
+  public void processDocumentMin() throws Exception {
+    SzemelyDTO szemelyDTO = createMinimalSzemelyDTO();
+
+    List<ValidationError> validationErrors =
+            getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
+    logger.info("validationErrors:", validationErrors);
+    Assert.assertEquals(false, validationErrors.isEmpty());
+  }
+
+  @Test
   public void processDocumentOk() throws Exception {
     SzemelyDTO szemelyDTO = createSzemelyDTO();
 
@@ -173,6 +183,14 @@ public class DocumentProcessorApplicationTests {
     szemelyDTO.setSzulDat(new SimpleDateFormat("yyyy-MM-dd").parse("1985-09-19"));
     szemelyDTO.setSzulNev("Nagy Ferenc");
     szemelyDTO.setVisNev("Nagy Ferenc");
+    return szemelyDTO;
+  }
+
+  private SzemelyDTO createMinimalSzemelyDTO() {
+    SzemelyDTO szemelyDTO = new SzemelyDTO();
+    szemelyDTO.setOkmLista(new ArrayList<>());
+    OkmanyDTO okmanyDTO = new OkmanyDTO();
+    szemelyDTO.getOkmLista().add(okmanyDTO);
     return szemelyDTO;
   }
 
