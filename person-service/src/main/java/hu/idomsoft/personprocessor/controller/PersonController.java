@@ -1,6 +1,7 @@
 package hu.idomsoft.personprocessor.controller;
 
 import hu.idomsoft.common.dto.ProcessDocumentResponse;
+import hu.idomsoft.common.dto.ProcessPersonRequest;
 import hu.idomsoft.common.dto.ProcessPersonResponse;
 import hu.idomsoft.common.dto.SzemelyDTO;
 import hu.idomsoft.common.proxy.DocumentServiceProxy;
@@ -23,8 +24,9 @@ public class PersonController {
     private DocumentServiceProxy documentServiceProxy;
 
     @PostMapping(value = "/processPerson", consumes = "application/json", produces = "application/json")
-    public ProcessPersonResponse processPerson(@RequestBody SzemelyDTO szemelyDTO) {
-        logger.debug("request: {}", szemelyDTO);
+    public ProcessPersonResponse processPerson(@RequestBody ProcessPersonRequest request) {
+        logger.debug("request: {}", request);
+        SzemelyDTO szemelyDTO = request.getSzemelyDTO();
         ProcessDocumentResponse processPersonResponse = documentServiceProxy.processDocument(szemelyDTO);
         szemelyDTO.setOkmLista(processPersonResponse.getOkmanyDTOList());
 

@@ -1,10 +1,7 @@
 package hu.idomsoft.documentprocessor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hu.idomsoft.common.dto.OkmanyDTO;
-import hu.idomsoft.common.dto.ProcessDocumentResponse;
-import hu.idomsoft.common.dto.SzemelyDTO;
-import hu.idomsoft.common.dto.ValidationError;
+import hu.idomsoft.common.dto.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Assert;
@@ -134,9 +131,11 @@ public class DocumentProcessorApplicationTests {
     }
 
     private ProcessDocumentResponse processDocumentResponse(SzemelyDTO szemelyDTO) throws Exception {
+        ProcessDocumentRequest request = new ProcessDocumentRequest();
+        request.setSzemelyDTO(szemelyDTO);
         String responseString = mockMvc.perform(MockMvcRequestBuilders
                 .post("/processDocument")
-                .content(objectMapper.writeValueAsString(szemelyDTO))
+                .content(objectMapper.writeValueAsString(request))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse().getContentAsString();

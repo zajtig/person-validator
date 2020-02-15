@@ -1,6 +1,7 @@
 package hu.idomsoft.documentprocessor.controller;
 
 import hu.idomsoft.common.dto.OkmanyDTO;
+import hu.idomsoft.common.dto.ProcessDocumentRequest;
 import hu.idomsoft.common.dto.ProcessDocumentResponse;
 import hu.idomsoft.common.dto.SzemelyDTO;
 import hu.idomsoft.documentprocessor.service.DocumentService;
@@ -21,10 +22,10 @@ public class DocumentController {
     private DocumentService documentService;
 
     @PostMapping(value = "/processDocument", consumes = "application/json", produces = "application/json")
-    public ProcessDocumentResponse processDocument(@RequestBody SzemelyDTO szemelyDTO) {
-        logger.debug("request: {}", szemelyDTO);
+    public ProcessDocumentResponse processDocument(@RequestBody ProcessDocumentRequest request) {
+        logger.debug("request: {}", request);
         ProcessDocumentResponse response = new ProcessDocumentResponse();
-        List<OkmanyDTO> result = documentService.process(szemelyDTO.getOkmLista());
+        List<OkmanyDTO> result = documentService.process(request.getSzemelyDTO().getOkmLista());
         response.setOkmanyDTOList(result);
         logger.debug("responset: {}", response);
         return response;

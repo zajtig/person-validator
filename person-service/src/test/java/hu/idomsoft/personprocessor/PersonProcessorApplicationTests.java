@@ -176,9 +176,11 @@ public class PersonProcessorApplicationTests {
     }
 
     private ProcessPersonResponse processPersonResponse(SzemelyDTO szemelyDTO) throws Exception {
+        ProcessPersonRequest request = new ProcessPersonRequest();
+        request.setSzemelyDTO(szemelyDTO);
         String responseString = mockMvc.perform(MockMvcRequestBuilders
                 .post("/processPerson")
-                .content(objectMapper.writeValueAsString(szemelyDTO))
+                .content(objectMapper.writeValueAsString(request))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse().getContentAsString();
