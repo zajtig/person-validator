@@ -2,23 +2,23 @@ package hu.idomsoft.common.dao;
 
 public class Okmanytipus {
 
-    private String kod;
+  private String kod;
 
-    private String ertek;
+  private String ertek;
 
-    public String getKod() {
-        return kod;
-    }
+  public String getKod() {
+    return kod;
+  }
 
-    public void setKod(String kod) {
-        this.kod = kod;
-    }
+  public void setKod(String kod) {
+    this.kod = kod;
+  }
 
-    public String getErtek() {
-        return ertek;
-    }
+  public String getErtek() {
+    return ertek;
+  }
 
-    public void setErtek(String ertek) {
-        this.ertek = ertek;
-    }
+  public void setErtek(String ertek) {
+    this.ertek = ertek;
+  }
 }

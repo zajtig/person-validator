@@ -7,11 +7,14 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name="zuul-gateway-service")
-@RibbonClient(name="document-service")
+@FeignClient(name = "zuul-gateway-service")
+@RibbonClient(name = "document-service")
 public interface DocumentServiceProxy {
 
-    @PostMapping(value = "/document-service/processDocument", consumes = "application/json", produces = "application/json")
-    ProcessDocumentResponse processDocument(@RequestBody ProcessDocumentRequest processDocumentRequest);
-
+  @PostMapping(
+      value = "/document-service/processDocument",
+      consumes = "application/json",
+      produces = "application/json")
+  ProcessDocumentResponse processDocument(
+      @RequestBody ProcessDocumentRequest processDocumentRequest);
 }

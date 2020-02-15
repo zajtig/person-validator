@@ -12,13 +12,12 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class ZuulGatewayServerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ZuulGatewayServerApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(ZuulGatewayServerApplication.class, args);
+  }
 
-	@Bean
-	public Sampler defaultSampler() {
-		return Sampler.ALWAYS_SAMPLE;
-	}
-
+  @Bean
+  public Sampler defaultSampler() {
+    return Sampler.ALWAYS_SAMPLE;
+  }
 }

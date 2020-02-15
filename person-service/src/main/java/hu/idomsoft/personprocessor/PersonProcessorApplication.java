@@ -27,27 +27,28 @@ import java.io.IOException;
 @EnableDiscoveryClient
 public class PersonProcessorApplication implements CommandLineRunner {
 
-    @Autowired
-    private AllampolgDictionaryRepository allampolgDictionaryRepository;
+  @Autowired private AllampolgDictionaryRepository allampolgDictionaryRepository;
 
-    public static void main(String[] args) {
-        SpringApplication.run(PersonProcessorApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(PersonProcessorApplication.class, args);
+  }
 
-    @Override
-    public void run(String[] args) throws IOException {
-        loadAllampolgDictionary();
-    }
+  @Override
+  public void run(String[] args) throws IOException {
+    loadAllampolgDictionary();
+  }
 
-    private void loadAllampolgDictionary() throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        AllampolgDictionary dictionary = objectMapper.readValue(ResourceUtils.getFile(
-                "classpath:kodszotar21_allampolg.json"), AllampolgDictionary.class);
-        allampolgDictionaryRepository.insert(dictionary);
-    }
+  private void loadAllampolgDictionary() throws IOException {
+    ObjectMapper objectMapper = new ObjectMapper();
+    AllampolgDictionary dictionary =
+        objectMapper.readValue(
+            ResourceUtils.getFile("classpath:kodszotar21_allampolg.json"),
+            AllampolgDictionary.class);
+    allampolgDictionaryRepository.insert(dictionary);
+  }
 
-    @Bean
-    public Sampler defaultSampler() {
-        return Sampler.ALWAYS_SAMPLE;
-    }
+  @Bean
+  public Sampler defaultSampler() {
+    return Sampler.ALWAYS_SAMPLE;
+  }
 }

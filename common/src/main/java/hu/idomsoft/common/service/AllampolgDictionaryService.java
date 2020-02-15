@@ -11,30 +11,31 @@ import java.util.Optional;
 @Service
 public class AllampolgDictionaryService {
 
-    @Autowired
-    private AllampolgDictionaryRepository allampolgDictionaryRepository;
+  @Autowired private AllampolgDictionaryRepository allampolgDictionaryRepository;
 
-    private static final String DICTIONARY_NAME = "kodszotar21_allampolg";
+  private static final String DICTIONARY_NAME = "kodszotar21_allampolg";
 
-    public boolean validateAllampKod(String allampKod) {
-        Optional<AllampolgDictionary> dictionary = allampolgDictionaryRepository.findById(DICTIONARY_NAME);
-        AllampolgDictionary allampolgDictionary = dictionary.get();
-        for (Allampolg allampolg : allampolgDictionary.getRows()) {
-            if (allampKod.equals(allampolg.getKod())) {
-                return true;
-            }
-        }
-        return false;
+  public boolean validateAllampKod(String allampKod) {
+    Optional<AllampolgDictionary> dictionary =
+        allampolgDictionaryRepository.findById(DICTIONARY_NAME);
+    AllampolgDictionary allampolgDictionary = dictionary.get();
+    for (Allampolg allampolg : allampolgDictionary.getRows()) {
+      if (allampKod.equals(allampolg.getKod())) {
+        return true;
+      }
     }
+    return false;
+  }
 
-    public String decodeAllampKod(String allampKod) {
-        Optional<AllampolgDictionary> dictionary = allampolgDictionaryRepository.findById(DICTIONARY_NAME);
-        AllampolgDictionary allampolgDictionary = dictionary.get();
-        for (Allampolg allampolg : allampolgDictionary.getRows()) {
-            if (allampKod.equals(allampolg.getKod())) {
-                return allampolg.getAllampolgarsag();
-            }
-        }
-        return null;
+  public String decodeAllampKod(String allampKod) {
+    Optional<AllampolgDictionary> dictionary =
+        allampolgDictionaryRepository.findById(DICTIONARY_NAME);
+    AllampolgDictionary allampolgDictionary = dictionary.get();
+    for (Allampolg allampolg : allampolgDictionary.getRows()) {
+      if (allampKod.equals(allampolg.getKod())) {
+        return allampolg.getAllampolgarsag();
+      }
     }
+    return null;
+  }
 }

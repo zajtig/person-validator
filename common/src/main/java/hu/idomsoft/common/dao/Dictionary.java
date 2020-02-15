@@ -6,21 +6,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "dictionary")
 public abstract class Dictionary {
 
-    @Id
-    private String dictname;
+  @Id private String dictname;
 
-    public String getDictname() {
-        return dictname;
-    }
+  public String getDictname() {
+    return dictname;
+  }
 
-    public void setDictname(String dictname) {
-        this.dictname = dictname;
-    }
+  public void setDictname(String dictname) {
+    this.dictname = dictname;
+  }
 
-    @Override
-    public String toString() {
-        return "Dictionary{" +
-                "dictname='" + dictname + '\'' +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "Dictionary{" + "dictname='" + dictname + '\'' + '}';
+  }
 }

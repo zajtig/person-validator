@@ -10,8 +10,7 @@ import javax.validation.Valid;
 @Validated
 class ValidatingService {
 
-    void validateInput(@Valid SzemelyDTO szemelyDTO) {
-        // do something
-    }
-
+  void validateInput(@Valid SzemelyDTO szemelyDTO) {
+    // do something
+  }
 }

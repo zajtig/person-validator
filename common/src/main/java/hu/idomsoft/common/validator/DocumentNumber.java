@@ -13,11 +13,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = DocumentNumberValidator.class)
 public @interface DocumentNumber {
 
-    String message() default "";
+  String message() default "";
 
-    String fieldName();
+  String fieldName();
 
-    Class<?>[] groups() default { };
+  Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default { };
+  Class<? extends Payload>[] payload() default {};
 }

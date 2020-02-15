@@ -15,44 +15,43 @@ import java.util.Set;
 @Service
 public class PersonService {
 
-    @Autowired
-    private Validator validator;
+  @Autowired private Validator validator;
 
-    @Autowired
-    private AllampolgDictionaryService allampolgDictionaryService;
+  @Autowired private AllampolgDictionaryService allampolgDictionaryService;
 
-    public SzemelyDTO process(SzemelyDTO szemelyDTO) {
-        List<ValidationError> validationErrors = validate(szemelyDTO);
-        szemelyDTO.setValidationErrors(validationErrors);
-        fillData(szemelyDTO);
+  public SzemelyDTO process(SzemelyDTO szemelyDTO) {
+    List<ValidationError> validationErrors = validate(szemelyDTO);
+    szemelyDTO.setValidationErrors(validationErrors);
+    fillData(szemelyDTO);
 
-        return szemelyDTO;
+    return szemelyDTO;
+  }
+
+  private List<ValidationError> validate(SzemelyDTO szemelyDTO) {
+    List<ValidationError> result = new ArrayList<>();
+    Set<ConstraintViolation<SzemelyDTO>> errors = validator.validate(szemelyDTO);
+
+    for (ConstraintViolation<SzemelyDTO> error : errors) {
+      ValidationError validationError =
+          new ValidationError(error.getPropertyPath().toString(), error.getMessage());
+      result.add(validationError);
     }
+    return result;
+  }
 
-    private List<ValidationError> validate(SzemelyDTO szemelyDTO) {
-        List<ValidationError> result = new ArrayList<>();
-        Set<ConstraintViolation<SzemelyDTO>> errors = validator.validate(szemelyDTO);
-
-        for (ConstraintViolation<SzemelyDTO> error : errors) {
-            ValidationError validationError = new ValidationError(error.getPropertyPath().toString(), error.getMessage());
-            result.add(validationError);
-        }
-        return result;
+  private boolean isAllampolgValid(SzemelyDTO szemelyDTO) {
+    for (ValidationError validationError : szemelyDTO.getValidationErrors()) {
+      if ("allampKod".equals(validationError.getField())) {
+        return false;
+      }
     }
+    return true;
+  }
 
-    private boolean isAllampolgValid(SzemelyDTO szemelyDTO) {
-        for (ValidationError validationError : szemelyDTO.getValidationErrors()) {
-            if ("allampKod".equals(validationError.getField())) {
-                return false;
-            }
-        }
-        return true;
+  private void fillData(SzemelyDTO szemelyDTO) {
+    if (isAllampolgValid(szemelyDTO)) {
+      String allampDekod = allampolgDictionaryService.decodeAllampKod(szemelyDTO.getAllampKod());
+      szemelyDTO.setAllampDekod(allampDekod);
     }
-
-    private void fillData(SzemelyDTO szemelyDTO) {
-        if (isAllampolgValid(szemelyDTO)) {
-            String allampDekod = allampolgDictionaryService.decodeAllampKod(szemelyDTO.getAllampKod());
-            szemelyDTO.setAllampDekod(allampDekod);
-        }
-    }
+  }
 }

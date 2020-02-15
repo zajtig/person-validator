@@ -16,14 +16,16 @@ import java.util.List;
 
 @RestController
 public class DocumentController {
-    @Autowired
-    private DocumentService documentService;
+  @Autowired private DocumentService documentService;
 
-    @PostMapping(value = "/processDocument", consumes = "application/json", produces = "application/json")
-    public ProcessDocumentResponse processDocument(@RequestBody ProcessDocumentRequest request) {
-        ProcessDocumentResponse response = new ProcessDocumentResponse();
-        List<OkmanyDTO> result = documentService.process(request.getSzemelyDTO().getOkmLista());
-        response.setOkmanyDTOList(result);
-        return response;
-    }
+  @PostMapping(
+      value = "/processDocument",
+      consumes = "application/json",
+      produces = "application/json")
+  public ProcessDocumentResponse processDocument(@RequestBody ProcessDocumentRequest request) {
+    ProcessDocumentResponse response = new ProcessDocumentResponse();
+    List<OkmanyDTO> result = documentService.process(request.getSzemelyDTO().getOkmLista());
+    response.setOkmanyDTOList(result);
+    return response;
+  }
 }

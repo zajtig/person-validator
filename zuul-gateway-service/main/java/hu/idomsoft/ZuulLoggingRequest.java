@@ -15,34 +15,34 @@ import java.nio.charset.Charset;
 @Component
 public class ZuulLoggingRequest extends ZuulFilter {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+  private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Override
-    public String filterType() {
-        return "pre";
+  @Override
+  public String filterType() {
+    return "pre";
+  }
+
+  @Override
+  public int filterOrder() {
+    return 1;
+  }
+
+  @Override
+  public boolean shouldFilter() {
+    return true;
+  }
+
+  @Override
+  public Object run() throws ZuulException {
+    try {
+      RequestContext context = RequestContext.getCurrentContext();
+      InputStream in = context.getRequest().getInputStream();
+      String body = StreamUtils.copyToString(in, Charset.forName("UTF-8"));
+      logger.info("request: {}", body);
+
+    } catch (IOException e) {
+      logger.info("", e);
     }
-
-    @Override
-    public int filterOrder() {
-        return 1;
-    }
-
-    @Override
-    public boolean shouldFilter() {
-        return true;
-    }
-
-    @Override
-    public Object run() throws ZuulException {
-        try {
-            RequestContext context = RequestContext.getCurrentContext();
-            InputStream in = context.getRequest().getInputStream();
-            String body = StreamUtils.copyToString(in, Charset.forName("UTF-8"));
-            logger.info("request: {}", body);
-
-        } catch (IOException e) {
-            logger.info("", e);
-        }
-        return null;
-    }
+    return null;
+  }
 }

@@ -13,23 +13,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PersonController {
 
-    @Autowired
-    private PersonService personService;
+  @Autowired private PersonService personService;
 
-    @Autowired
-    private DocumentServiceProxy documentServiceProxy;
+  @Autowired private DocumentServiceProxy documentServiceProxy;
 
-    @PostMapping(value = "/processPerson", consumes = "application/json", produces = "application/json")
-    public ProcessPersonResponse processPerson(@RequestBody ProcessPersonRequest request) {
-        SzemelyDTO szemelyDTO = request.getSzemelyDTO();
-        ProcessDocumentRequest processDocumentRequest = new ProcessDocumentRequest();
-        processDocumentRequest.setSzemelyDTO(szemelyDTO);
-        ProcessDocumentResponse processPersonResponse = documentServiceProxy.processDocument(processDocumentRequest);
-        szemelyDTO.setOkmLista(processPersonResponse.getOkmanyDTOList());
+  @PostMapping(
+      value = "/processPerson",
+      consumes = "application/json",
+      produces = "application/json")
+  public ProcessPersonResponse processPerson(@RequestBody ProcessPersonRequest request) {
+    SzemelyDTO szemelyDTO = request.getSzemelyDTO();
+    ProcessDocumentRequest processDocumentRequest = new ProcessDocumentRequest();
+    processDocumentRequest.setSzemelyDTO(szemelyDTO);
+    ProcessDocumentResponse processPersonResponse =
+        documentServiceProxy.processDocument(processDocumentRequest);
+    szemelyDTO.setOkmLista(processPersonResponse.getOkmanyDTOList());
 
-        ProcessPersonResponse response = new ProcessPersonResponse();
-        SzemelyDTO result = personService.process(szemelyDTO);
-        response.setSzemelyDTO(result);
-        return response;
-    }
+    ProcessPersonResponse response = new ProcessPersonResponse();
+    SzemelyDTO result = personService.process(szemelyDTO);
+    response.setSzemelyDTO(result);
+    return response;
+  }
 }

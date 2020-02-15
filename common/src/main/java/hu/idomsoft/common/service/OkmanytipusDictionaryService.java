@@ -11,19 +11,19 @@ import java.util.Optional;
 @Service
 public class OkmanytipusDictionaryService {
 
-    @Autowired
-    private OkmanytipusDictionaryRepository okmanytipusDictionaryRepository;
+  @Autowired private OkmanytipusDictionaryRepository okmanytipusDictionaryRepository;
 
-    private static final String DICTIONARY_NAME = "kodszotar46_okmanytipus";
+  private static final String DICTIONARY_NAME = "kodszotar46_okmanytipus";
 
-    public boolean validateOkmTipus(String okmTipus) {
-        Optional<OkmanytipusDictionary> dictionary = okmanytipusDictionaryRepository.findById(DICTIONARY_NAME);
-        OkmanytipusDictionary okmanytipusDictionary = dictionary.get();
-        for (Okmanytipus okmanytipus : okmanytipusDictionary.getRows()) {
-            if (okmTipus.equals(okmanytipus.getKod())) {
-                return true;
-            }
-        }
-        return false;
+  public boolean validateOkmTipus(String okmTipus) {
+    Optional<OkmanytipusDictionary> dictionary =
+        okmanytipusDictionaryRepository.findById(DICTIONARY_NAME);
+    OkmanytipusDictionary okmanytipusDictionary = dictionary.get();
+    for (Okmanytipus okmanytipus : okmanytipusDictionary.getRows()) {
+      if (okmTipus.equals(okmanytipus.getKod())) {
+        return true;
+      }
     }
+    return false;
+  }
 }
