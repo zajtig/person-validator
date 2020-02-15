@@ -1,6 +1,8 @@
 package hu.idomsoft.common.dto;
 
-public class ValidationError {
+import java.io.Serializable;
+
+public class ValidationError implements Serializable {
   private String field;
 
   private String message;

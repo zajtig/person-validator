@@ -88,7 +88,7 @@ public class DocumentProcessorApplicationTests {
   public void processOkmanySzam3() throws Exception {
     SzemelyDTO szemelyDTO = createSzemelyDTO();
     szemelyDTO.getOkmLista().get(0).setOkmTipus("3");
-    szemelyDTO.getOkmLista().get(0).setOkmanySzam("0123456789");
+    szemelyDTO.getOkmLista().get(0).setOkmanySzam("012345678910");
 
     List<ValidationError> validationErrors =
         getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());

@@ -95,11 +95,21 @@ public class PersonProcessorApplicationTests {
   }
 
   @Test
-  public void processPersonSzulDat() throws Exception {
+  public void processPersonSzulDat1() throws Exception {
     SzemelyDTO szemelyDTO = createSzemelyDTO();
     szemelyDTO.setSzulDat(new SimpleDateFormat("yyyy-MM-dd").parse("1895-01-01"));
     List<ValidationError> validationErrors =
         getAllValidationError(processPerson(szemelyDTO).getSzemelyDTO());
+    System.out.println(validationErrors);
+    Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "szulDat"));
+  }
+
+  @Test
+  public void processPersonSzulDat2() throws Exception {
+    SzemelyDTO szemelyDTO = createSzemelyDTO();
+    szemelyDTO.setSzulDat(new SimpleDateFormat("yyyy-MM-dd").parse("2020-01-01"));
+    List<ValidationError> validationErrors =
+            getAllValidationError(processPerson(szemelyDTO).getSzemelyDTO());
     System.out.println(validationErrors);
     Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "szulDat"));
   }

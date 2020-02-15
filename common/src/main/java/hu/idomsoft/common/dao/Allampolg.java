@@ -1,7 +1,5 @@
 package hu.idomsoft.common.dao;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 public class Allampolg {
 
   private String dictname;

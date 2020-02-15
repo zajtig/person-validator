@@ -18,10 +18,12 @@ public class AllampolgDictionaryService {
   public boolean validateAllampKod(String allampKod) {
     Optional<AllampolgDictionary> dictionary =
         allampolgDictionaryRepository.findById(DICTIONARY_NAME);
-    AllampolgDictionary allampolgDictionary = dictionary.get();
-    for (Allampolg allampolg : allampolgDictionary.getRows()) {
-      if (allampKod.equals(allampolg.getKod())) {
-        return true;
+    if (dictionary.isPresent()) {
+      AllampolgDictionary allampolgDictionary = dictionary.get();
+      for (Allampolg allampolg : allampolgDictionary.getRows()) {
+        if (allampKod.equals(allampolg.getKod())) {
+          return true;
+        }
       }
     }
     return false;
@@ -30,10 +32,12 @@ public class AllampolgDictionaryService {
   public String decodeAllampKod(String allampKod) {
     Optional<AllampolgDictionary> dictionary =
         allampolgDictionaryRepository.findById(DICTIONARY_NAME);
-    AllampolgDictionary allampolgDictionary = dictionary.get();
-    for (Allampolg allampolg : allampolgDictionary.getRows()) {
-      if (allampKod.equals(allampolg.getKod())) {
-        return allampolg.getAllampolgarsag();
+    if (dictionary.isPresent()) {
+      AllampolgDictionary allampolgDictionary = dictionary.get();
+      for (Allampolg allampolg : allampolgDictionary.getRows()) {
+        if (allampKod.equals(allampolg.getKod())) {
+          return allampolg.getAllampolgarsag();
+        }
       }
     }
     return null;

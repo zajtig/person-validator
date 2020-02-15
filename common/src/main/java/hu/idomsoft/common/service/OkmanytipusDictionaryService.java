@@ -18,10 +18,12 @@ public class OkmanytipusDictionaryService {
   public boolean validateOkmTipus(String okmTipus) {
     Optional<OkmanytipusDictionary> dictionary =
         okmanytipusDictionaryRepository.findById(DICTIONARY_NAME);
-    OkmanytipusDictionary okmanytipusDictionary = dictionary.get();
-    for (Okmanytipus okmanytipus : okmanytipusDictionary.getRows()) {
-      if (okmTipus.equals(okmanytipus.getKod())) {
-        return true;
+    if (dictionary.isPresent()) {
+      OkmanytipusDictionary okmanytipusDictionary = dictionary.get();
+      for (Okmanytipus okmanytipus : okmanytipusDictionary.getRows()) {
+        if (okmTipus.equals(okmanytipus.getKod())) {
+          return true;
+        }
       }
     }
     return false;

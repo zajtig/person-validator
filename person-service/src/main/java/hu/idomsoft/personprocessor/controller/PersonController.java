@@ -3,8 +3,6 @@ package hu.idomsoft.personprocessor.controller;
 import hu.idomsoft.common.dto.*;
 import hu.idomsoft.common.proxy.DocumentServiceProxy;
 import hu.idomsoft.personprocessor.service.PersonService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

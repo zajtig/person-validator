@@ -1,6 +1,9 @@
 package hu.idomsoft.common.validator;
 
 import hu.idomsoft.common.dto.OkmanyDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -12,6 +15,9 @@ import java.util.stream.Collectors;
 
 public class DocumentsValidator implements ConstraintValidator<Documents, List<OkmanyDTO>> {
 
+  @Autowired
+  private MessageSource messageSource;
+
   @Override
   public boolean isValid(List<OkmanyDTO> okmanyDTOList, ConstraintValidatorContext context) {
     context.disableDefaultConstraintViolation();
@@ -22,11 +28,7 @@ public class DocumentsValidator implements ConstraintValidator<Documents, List<O
     for (OkmanyDTO okmanyDTO : okmanyDTOList) {
       if (okmanyDTO.isErvenyes()) {
         if (documentCountByType.containsKey(okmanyDTO.getOkmTipus())) {
-          messages.add(
-              new StringBuilder("Az ")
-                  .append(okmanyDTO.getOkmTipus())
-                  .append(" okmányból egynél több érvényes érkezett!")
-                  .toString());
+          messages.add(messageSource.getMessage("validator.documents.error", new Object[]{okmanyDTO.getOkmTipus()}, LocaleContextHolder.getLocale()));
         } else {
           documentCountByType.put(okmanyDTO.getOkmTipus(), okmanyDTO);
         }

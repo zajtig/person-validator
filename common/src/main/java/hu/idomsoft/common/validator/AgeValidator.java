@@ -1,5 +1,8 @@
 package hu.idomsoft.common.validator;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.util.StringUtils;
 
 import javax.validation.ConstraintValidator;
@@ -13,6 +16,9 @@ public class AgeValidator implements ConstraintValidator<Age, Date> {
 
   private int min;
   private int max;
+
+  @Autowired
+  private MessageSource messageSource;
 
   @Override
   public void initialize(Age constraintAnnotation) {
@@ -35,10 +41,10 @@ public class AgeValidator implements ConstraintValidator<Age, Date> {
 
     String message = null;
     if (diff < min) {
-      message = "A megadott életkor kisebb mint " + min + " Érkezett: " + diff;
+      message = messageSource.getMessage("validator.age.min.error", new Object[]{min, diff}, LocaleContextHolder.getLocale());
     }
     if (diff > max) {
-      message = "A megadott életkor nagyobb mint " + max + " Érkezett: " + diff;
+      message = messageSource.getMessage("validator.age.max.error", new Object[]{min, diff}, LocaleContextHolder.getLocale());
     }
 
     if (!StringUtils.isEmpty(message)) {
