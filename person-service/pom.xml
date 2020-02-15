@@ -10,6 +10,11 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>person-service</name>
   <description>Demo project for Spring Boot</description>
+
+  <properties>
+    <start-class>hu.idomsoft.personprocessor.PersonProcessorApplication</start-class>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>hu.idomsoft</groupId>
