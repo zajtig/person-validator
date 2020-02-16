@@ -92,7 +92,8 @@ public class OkmanyDTO implements Serializable {
   private String okmTipus;
 
   @ApiModelProperty(notes = "1: SZIG: 6 szám + 2 betű; 2: UTL 2 betű + 7 szám; egyéb bármi max 10.")
-  @NotBlank private String okmanySzam;
+  @NotBlank
+  private String okmanySzam;
 
   @NotEmpty
   @Jpeg(height = 1063, width = 827)
@@ -101,7 +102,8 @@ public class OkmanyDTO implements Serializable {
 
   private Date lejarDat;
 
-  @ApiModelProperty(notes = "Érkezéskor üres, számítandó, amennyiben az érvényességi idő még jövőbeni.")
+  @ApiModelProperty(
+      notes = "Érkezéskor üres, számítandó, amennyiben az érvényességi idő még jövőbeni.")
   private Boolean ervenyes;
 
   @ApiModelProperty(notes = "Validációs hibák listája")

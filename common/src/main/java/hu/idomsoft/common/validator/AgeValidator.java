@@ -17,8 +17,7 @@ public class AgeValidator implements ConstraintValidator<Age, Date> {
   private int min;
   private int max;
 
-  @Autowired
-  private MessageSource messageSource;
+  @Autowired private MessageSource messageSource;
 
   @Override
   public void initialize(Age constraintAnnotation) {
@@ -41,10 +40,14 @@ public class AgeValidator implements ConstraintValidator<Age, Date> {
 
     String message = null;
     if (diff < min) {
-      message = messageSource.getMessage("validator.age.min.error", new Object[]{min, diff}, LocaleContextHolder.getLocale());
+      message =
+          messageSource.getMessage(
+              "validator.age.min.error", new Object[] {min, diff}, LocaleContextHolder.getLocale());
     }
     if (diff > max) {
-      message = messageSource.getMessage("validator.age.max.error", new Object[]{min, diff}, LocaleContextHolder.getLocale());
+      message =
+          messageSource.getMessage(
+              "validator.age.max.error", new Object[] {min, diff}, LocaleContextHolder.getLocale());
     }
 
     if (!StringUtils.isEmpty(message)) {

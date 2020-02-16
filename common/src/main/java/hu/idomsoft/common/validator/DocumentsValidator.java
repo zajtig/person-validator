@@ -15,8 +15,7 @@ import java.util.stream.Collectors;
 
 public class DocumentsValidator implements ConstraintValidator<Documents, List<OkmanyDTO>> {
 
-  @Autowired
-  private MessageSource messageSource;
+  @Autowired private MessageSource messageSource;
 
   @Override
   public boolean isValid(List<OkmanyDTO> okmanyDTOList, ConstraintValidatorContext context) {
@@ -28,7 +27,11 @@ public class DocumentsValidator implements ConstraintValidator<Documents, List<O
     for (OkmanyDTO okmanyDTO : okmanyDTOList) {
       if (okmanyDTO.isErvenyes()) {
         if (documentCountByType.containsKey(okmanyDTO.getOkmTipus())) {
-          messages.add(messageSource.getMessage("validator.documents.error", new Object[]{okmanyDTO.getOkmTipus()}, LocaleContextHolder.getLocale()));
+          messages.add(
+              messageSource.getMessage(
+                  "validator.documents.error",
+                  new Object[] {okmanyDTO.getOkmTipus()},
+                  LocaleContextHolder.getLocale()));
         } else {
           documentCountByType.put(okmanyDTO.getOkmTipus(), okmanyDTO);
         }

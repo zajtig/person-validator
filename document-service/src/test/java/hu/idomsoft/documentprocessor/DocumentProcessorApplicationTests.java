@@ -45,7 +45,7 @@ public class DocumentProcessorApplicationTests {
     SzemelyDTO szemelyDTO = createMinimalSzemelyDTO();
 
     List<ValidationError> validationErrors =
-            getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
+        getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
     logger.info("validationErrors:{}", validationErrors);
     Assert.assertEquals(false, validationErrors.isEmpty());
   }
@@ -56,8 +56,8 @@ public class DocumentProcessorApplicationTests {
 
     List<ValidationError> validationErrors =
         getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
-      logger.info("validationErrors:{}", validationErrors);
-      Assert.assertEquals(true, validationErrors.isEmpty());
+    logger.info("validationErrors:{}", validationErrors);
+    Assert.assertEquals(true, validationErrors.isEmpty());
   }
 
   @Test
@@ -113,8 +113,8 @@ public class DocumentProcessorApplicationTests {
 
     List<ValidationError> validationErrors =
         getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
-      logger.info("validationErrors:{}", validationErrors);
-      Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "okmanyKep"));
+    logger.info("validationErrors:{}", validationErrors);
+    Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "okmanyKep"));
   }
 
   @Test
@@ -124,8 +124,8 @@ public class DocumentProcessorApplicationTests {
 
     List<ValidationError> validationErrors =
         getAllValidationError(processDocumentResponse(szemelyDTO).getOkmanyDTOList());
-      logger.info("validationErrors:{}", validationErrors);
-      Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "okmanyKep"));
+    logger.info("validationErrors:{}", validationErrors);
+    Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "okmanyKep"));
   }
 
   @Test

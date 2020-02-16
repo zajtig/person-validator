@@ -19,8 +19,7 @@ public class DocumentNumberValidator implements ConstraintValidator<DocumentNumb
 
   private String fieldName;
 
-  @Autowired
-  private MessageSource messageSource;
+  @Autowired private MessageSource messageSource;
 
   @Override
   public void initialize(DocumentNumber constraintAnnotation) {
@@ -56,7 +55,10 @@ public class DocumentNumberValidator implements ConstraintValidator<DocumentNumb
 
   private String matches(String value, String pattern) {
     return value.matches(pattern)
-                    ? ""
-                    : messageSource.getMessage("validator.documentNumber.error", new Object[]{pattern}, LocaleContextHolder.getLocale());
+        ? ""
+        : messageSource.getMessage(
+            "validator.documentNumber.error",
+            new Object[] {pattern},
+            LocaleContextHolder.getLocale());
   }
 }

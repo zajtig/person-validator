@@ -19,23 +19,25 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @Configuration
 @EnableSwagger2
 public class Swagger2Config {
-    @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2).select()
-                .apis(RequestHandlerSelectors
-                        .basePackage("hu.idomsoft"))
-                .paths(PathSelectors.regex("/.*"))
-                .build().apiInfo(apiEndPointsInfo());
-    }
+  @Bean
+  public Docket api() {
+    return new Docket(DocumentationType.SWAGGER_2)
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("hu.idomsoft"))
+        .paths(PathSelectors.regex("/.*"))
+        .build()
+        .apiInfo(apiEndPointsInfo());
+  }
 
-    private ApiInfo apiEndPointsInfo() {
+  private ApiInfo apiEndPointsInfo() {
 
-        return new ApiInfoBuilder().title("Spring Boot REST API")
-                .description("Employee Management REST API")
-                .contact(new Contact("Gábor Zajti", null, "zajtig@gmail.com"))
-                .license("Apache 2.0")
-                .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
-                .version("1.0.0")
-                .build();
-    }
+    return new ApiInfoBuilder()
+        .title("Spring Boot REST API")
+        .description("Employee Management REST API")
+        .contact(new Contact("Gábor Zajti", null, "zajtig@gmail.com"))
+        .license("Apache 2.0")
+        .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
+        .version("1.0.0")
+        .build();
+  }
 }

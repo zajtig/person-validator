@@ -50,7 +50,7 @@ public class PersonProcessorApplicationTests {
     SzemelyDTO szemelyDTO = createMinimalSemelyDTO();
 
     List<ValidationError> validationErrors =
-            getAllValidationError(processPerson(szemelyDTO).getSzemelyDTO());
+        getAllValidationError(processPerson(szemelyDTO).getSzemelyDTO());
     logger.info("validationErrors:{}", validationErrors);
     Assert.assertEquals(false, validationErrors.isEmpty());
   }
@@ -123,7 +123,7 @@ public class PersonProcessorApplicationTests {
     SzemelyDTO szemelyDTO = createSzemelyDTO();
     szemelyDTO.setSzulDat(new SimpleDateFormat("yyyy-MM-dd").parse("2020-01-01"));
     List<ValidationError> validationErrors =
-            getAllValidationError(processPerson(szemelyDTO).getSzemelyDTO());
+        getAllValidationError(processPerson(szemelyDTO).getSzemelyDTO());
     logger.info("validationErrors:{}", validationErrors);
     Assert.assertEquals(true, existsValidationErrorOnField(validationErrors, "szulDat"));
   }

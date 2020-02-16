@@ -11,11 +11,9 @@ import javax.validation.ConstraintValidatorContext;
 
 public class DocumentTypeValidator implements ConstraintValidator<DocumentType, String> {
 
-  @Autowired
-  private OkmanytipusDictionaryService okmanytipusDictionaryService;
+  @Autowired private OkmanytipusDictionaryService okmanytipusDictionaryService;
 
-  @Autowired
-  private MessageSource messageSource;
+  @Autowired private MessageSource messageSource;
 
   @Override
   public boolean isValid(String value, ConstraintValidatorContext context) {
@@ -27,7 +25,11 @@ public class DocumentTypeValidator implements ConstraintValidator<DocumentType, 
 
     String message = null;
     if (!okmanytipusDictionaryService.validateOkmTipus(value)) {
-      message = messageSource.getMessage("validator.documentType.error", new Object[]{value}, LocaleContextHolder.getLocale());
+      message =
+          messageSource.getMessage(
+              "validator.documentType.error",
+              new Object[] {value},
+              LocaleContextHolder.getLocale());
     }
 
     if (!StringUtils.isEmpty(message)) {

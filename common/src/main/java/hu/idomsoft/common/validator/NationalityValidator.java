@@ -11,11 +11,9 @@ import javax.validation.ConstraintValidatorContext;
 
 public class NationalityValidator implements ConstraintValidator<Nationality, String> {
 
-  @Autowired
-  private AllampolgDictionaryService allampolgDictionaryService;
+  @Autowired private AllampolgDictionaryService allampolgDictionaryService;
 
-  @Autowired
-  private MessageSource messageSource;
+  @Autowired private MessageSource messageSource;
 
   @Override
   public boolean isValid(String value, ConstraintValidatorContext context) {
@@ -27,7 +25,9 @@ public class NationalityValidator implements ConstraintValidator<Nationality, St
 
     String message = null;
     if (!allampolgDictionaryService.validateAllampKod(value)) {
-      message = messageSource.getMessage("validator.nationality.error", new Object[] {value}, LocaleContextHolder.getLocale());
+      message =
+          messageSource.getMessage(
+              "validator.nationality.error", new Object[] {value}, LocaleContextHolder.getLocale());
     }
 
     if (!StringUtils.isEmpty(message)) {

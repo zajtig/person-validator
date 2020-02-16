@@ -22,8 +22,7 @@ public class JpegValidator implements ConstraintValidator<Jpeg, Byte[]> {
   private int definedHeight;
   private int definedWidth;
 
-  @Autowired
-  private MessageSource messageSource;
+  @Autowired private MessageSource messageSource;
 
   @Override
   public void initialize(Jpeg constraintAnnotation) {
@@ -46,10 +45,16 @@ public class JpegValidator implements ConstraintValidator<Jpeg, Byte[]> {
               new ByteArrayInputStream(ArrayUtils.toPrimitive(value)));
       MediaType mediaType = MediaType.parseMediaType(mimeType);
       if (!mediaType.equalsTypeAndSubtype(MediaType.IMAGE_JPEG)) {
-        messages.add(messageSource.getMessage("validator.jpeg.typeNotJpeg.error", new Object[]{MediaType.IMAGE_JPEG.toString()}, LocaleContextHolder.getLocale()));
+        messages.add(
+            messageSource.getMessage(
+                "validator.jpeg.typeNotJpeg.error",
+                new Object[] {MediaType.IMAGE_JPEG.toString()},
+                LocaleContextHolder.getLocale()));
       }
     } catch (Exception e) {
-      messages.add(messageSource.getMessage("validator.jpeg.typeProcess.error",null, LocaleContextHolder.getLocale()));
+      messages.add(
+          messageSource.getMessage(
+              "validator.jpeg.typeProcess.error", null, LocaleContextHolder.getLocale()));
     }
 
     if (messages.isEmpty()) {
@@ -59,13 +64,23 @@ public class JpegValidator implements ConstraintValidator<Jpeg, Byte[]> {
         int currentWidth = image.getWidth();
         int currentHeight = image.getHeight();
         if (definedHeight != currentHeight) {
-          messages.add(messageSource.getMessage("validator.jpeg.height.error", new Object[]{definedHeight, currentHeight}, LocaleContextHolder.getLocale()));
+          messages.add(
+              messageSource.getMessage(
+                  "validator.jpeg.height.error",
+                  new Object[] {definedHeight, currentHeight},
+                  LocaleContextHolder.getLocale()));
         }
         if (definedWidth != currentWidth) {
-          messages.add(messageSource.getMessage("validator.jpeg.width.error", new Object[]{definedWidth, currentWidth}, LocaleContextHolder.getLocale()));
+          messages.add(
+              messageSource.getMessage(
+                  "validator.jpeg.width.error",
+                  new Object[] {definedWidth, currentWidth},
+                  LocaleContextHolder.getLocale()));
         }
       } catch (IOException e) {
-        messages.add(messageSource.getMessage("validator.jpeg.loadImage.error", null, LocaleContextHolder.getLocale()));
+        messages.add(
+            messageSource.getMessage(
+                "validator.jpeg.loadImage.error", null, LocaleContextHolder.getLocale()));
       }
     }
 

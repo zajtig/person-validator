@@ -12,8 +12,7 @@ public class NameValidator implements ConstraintValidator<Name, String> {
 
   private static final String DOCTOR_PATTERN = "[dD][rR].";
 
-  @Autowired
-  private MessageSource messageSource;
+  @Autowired private MessageSource messageSource;
 
   @Override
   public boolean isValid(String value, ConstraintValidatorContext context) {
@@ -25,7 +24,8 @@ public class NameValidator implements ConstraintValidator<Name, String> {
     String message = null;
 
     if (value.replaceAll(DOCTOR_PATTERN, "").trim().indexOf(' ') == -1) {
-      message = messageSource.getMessage("validator.name.error", null, LocaleContextHolder.getLocale());
+      message =
+          messageSource.getMessage("validator.name.error", null, LocaleContextHolder.getLocale());
     }
 
     if (!StringUtils.isEmpty(message)) {
