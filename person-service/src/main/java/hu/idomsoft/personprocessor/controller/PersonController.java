@@ -3,6 +3,7 @@ package hu.idomsoft.personprocessor.controller;
 import hu.idomsoft.common.dto.*;
 import hu.idomsoft.common.proxy.DocumentServiceProxy;
 import hu.idomsoft.personprocessor.service.PersonService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,7 @@ public class PersonController {
       value = "/processPerson",
       consumes = "application/json",
       produces = "application/json")
+  @ApiOperation(value = "Egy személy és a hozzátartozó okmányok validációját végző szolgáltatás")
   public ProcessPersonResponse processPerson(@RequestBody ProcessPersonRequest request) {
     SzemelyDTO szemelyDTO = request.getSzemelyDTO();
     ProcessDocumentRequest processDocumentRequest = new ProcessDocumentRequest();

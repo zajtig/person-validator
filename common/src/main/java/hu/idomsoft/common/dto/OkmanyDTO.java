@@ -8,6 +8,8 @@ package hu.idomsoft.common.dto;
 import hu.idomsoft.common.validator.DocumentNumber;
 import hu.idomsoft.common.validator.DocumentType;
 import hu.idomsoft.common.validator.Jpeg;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -20,6 +22,7 @@ import java.util.List;
 
 /** @author Ruzsinak */
 @DocumentNumber(fieldName = "okmanySzam")
+@ApiModel(description = "Egy okmányt reprezentáló osztály")
 public class OkmanyDTO implements Serializable {
 
   /** @return the okmTipus */
@@ -85,18 +88,23 @@ public class OkmanyDTO implements Serializable {
   @NotBlank
   @Size(min = 1, max = 1)
   @DocumentType
+  @ApiModelProperty(notes = "Egy karakter, értékkészlete a kodszotar46_okmanytipus szótár.")
   private String okmTipus;
 
+  @ApiModelProperty(notes = "1: SZIG: 6 szám + 2 betű; 2: UTL 2 betű + 7 szám; egyéb bármi max 10.")
   @NotBlank private String okmanySzam;
 
   @NotEmpty
   @Jpeg(height = 1063, width = 827)
+  @ApiModelProperty(notes = "jpeg típusúnak kell lennie, 1063 * 827 méretűnek.")
   private Byte[] okmanyKep;
 
   private Date lejarDat;
 
+  @ApiModelProperty(notes = "Érkezéskor üres, számítandó, amennyiben az érvényességi idő még jövőbeni.")
   private Boolean ervenyes;
 
+  @ApiModelProperty(notes = "Validációs hibák listája")
   private List<ValidationError> validationErrors = new ArrayList<>();
 
   @Override

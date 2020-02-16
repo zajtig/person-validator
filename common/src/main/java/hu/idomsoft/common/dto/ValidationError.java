@@ -1,10 +1,15 @@
 package hu.idomsoft.common.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 public class ValidationError implements Serializable {
+
+  @ApiModelProperty(notes = "Melyik mezőhöz tartozik a hibaüzenet")
   private String field;
 
+  @ApiModelProperty(notes = "Hibaüzenet")
   private String message;
 
   public ValidationError() {}
