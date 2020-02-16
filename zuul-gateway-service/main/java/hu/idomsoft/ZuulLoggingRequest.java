@@ -41,7 +41,7 @@ public class ZuulLoggingRequest extends ZuulFilter {
       logger.info("request: {}", body);
 
     } catch (IOException e) {
-      logger.info("", e);
+      logger.warn("", e);
     }
     return null;
   }
